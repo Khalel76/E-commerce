@@ -248,7 +248,6 @@ function filterProducts() {
         );
     }
 
-    console.log(state.currentCategory);
     if (state.currentCategory !== 'all') {
         filtered = filtered.filter(product =>
             product.category === state.currentCategory
@@ -303,7 +302,7 @@ function debounce(func, delay) {
 elements.searchInput.addEventListener('input', debounce((e) => {
     state.currentSearchQuery = e.target.value.trim();
     filterProducts();
-}, 300));
+}, 400));
 
 elements.categoryFilter.addEventListener('change', (e) => {
     state.currentCategory = e.target.value;
