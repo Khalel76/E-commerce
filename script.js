@@ -1,5 +1,3 @@
-
-// State Management
 const state = {
     allProducts: [],
     filteredProducts: [],
@@ -8,7 +6,6 @@ const state = {
     currentCategory: 'all'
 };
 
-// DOM Elements
 const elements = {
     searchInput: document.getElementById('search-input'),
     categoryFilter: document.getElementById('category-filter'),
@@ -24,13 +21,11 @@ const elements = {
     closeModalBtn: document.getElementById('close-modal-btn')
 };
 
-// API Endpoints
 const API = {
     PRODUCTS: 'https://fakestoreapi.com/products',
     CATEGORIES: 'https://fakestoreapi.com/products/categories'
 };
 
-// Fetch Products from API
 async function fetchProducts() {
     try {
         const response = await fetch(API.PRODUCTS);
@@ -43,7 +38,6 @@ async function fetchProducts() {
     }
 }
 
-// Fetch Categories from API
 async function fetchCategories() {
     try {
         const response = await fetch(API.CATEGORIES);
@@ -56,41 +50,25 @@ async function fetchCategories() {
     }
 }
 
-// Initialize Application
 async function initializeApp() {
     try {
-        // Show loading spinner
         showLoading();
-
-        // Fetch data from API
         const [products, categories] = await Promise.all([
             fetchProducts(),
             fetchCategories()
         ]);
-
-        // Update state
         state.allProducts = products;
         state.filteredProducts = products;
         state.categories = categories;
-
-        // Populate categories dropdown
         populateCategories();
-
-        // Display products
         displayProducts(state.filteredProducts);
-
-        // Hide loading spinner
         hideLoading();
-
-        // Update results count
         updateResultsCount();
-
     } catch (error) {
         showError();
     }
 }
 
-// Show Loading State
 function showLoading() {
     elements.loadingSpinner.classList.remove('hidden');
     elements.productsGrid.classList.add('hidden');
@@ -98,12 +76,10 @@ function showLoading() {
     elements.noResults.classList.add('hidden');
 }
 
-// Hide Loading State
 function hideLoading() {
     elements.loadingSpinner.classList.add('hidden');
 }
 
-// Show Error State
 function showError() {
     hideLoading();
     elements.errorMessage.classList.remove('hidden');
@@ -111,7 +87,6 @@ function showError() {
     elements.noResults.classList.add('hidden');
 }
 
-// Populate Categories Dropdown
 function populateCategories() {
     state.categories.forEach(category => {
         const option = document.createElement('option');
@@ -121,7 +96,6 @@ function populateCategories() {
     });
 }
 
-// Display Products in Grid
 function displayProducts(products) {
     elements.productsGrid.innerHTML = '';
 
@@ -138,14 +112,12 @@ function displayProducts(products) {
         const productCard = createProductCard(product);
         elements.productsGrid.appendChild(productCard);
 
-        // Add stagger animation
         setTimeout(() => {
             productCard.classList.add('fade-in');
         }, index * 50);
     });
 }
 
-// Create Product Card Element
 function createProductCard(product) {
     const card = document.createElement('div');
     card.className = 'product-card opacity-0';
@@ -182,7 +154,6 @@ function createProductCard(product) {
     return card;
 }
 
-// Get Category CSS Class
 function getCategoryClass(category) {
     const categoryMap = {
         'electronics': 'category-electronics',
@@ -193,7 +164,6 @@ function getCategoryClass(category) {
     return categoryMap[category] || 'category-electronics';
 }
 
-// Generate Star Rating
 function generateStars(rating) {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
@@ -212,18 +182,15 @@ function generateStars(rating) {
     return stars;
 }
 
-// Open Product Detail Modal
 function openProductModal(product) {
     const categoryClass = getCategoryClass(product.category);
 
     elements.modalContent.innerHTML = `
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Product Image -->
             <div class="flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-8">
                 <img src="${product.image}" alt="${product.title}" class="modal-product-image">
             </div>
             
-            <!-- Product Details -->
             <div class="flex flex-col justify-between">
                 <div>
                     <span class="category-badge ${categoryClass} mb-4 inline-block">
@@ -266,25 +233,21 @@ function openProductModal(product) {
     document.body.style.overflow = 'hidden';
 }
 
-// Close Product Detail Modal
 function closeProductModal() {
     elements.productModal.classList.add('hidden');
     elements.productModal.classList.remove('flex');
     document.body.style.overflow = 'auto';
 }
 
-// Filter Products
 function filterProducts() {
     let filtered = [...state.allProducts];
 
-    // Apply search filter
     if (state.currentSearchQuery) {
         filtered = filtered.filter(product =>
             product.title.toLowerCase().includes(state.currentSearchQuery.toLowerCase())
         );
     }
 
-    // Apply category filter
     console.log(state.currentCategory);
     if (state.currentCategory !== 'all') {
         filtered = filtered.filter(product =>
@@ -298,7 +261,6 @@ function filterProducts() {
     updateClearFiltersButton();
 }
 
-// Update Results Count
 function updateResultsCount() {
     const count = state.filteredProducts.length;
     const total = state.allProducts.length;
@@ -310,7 +272,6 @@ function updateResultsCount() {
     }
 }
 
-// Update Clear Filters Button Visibility
 function updateClearFiltersButton() {
     if (state.currentSearchQuery || state.currentCategory !== 'all') {
         elements.clearFiltersBtn.classList.remove('hidden');
@@ -319,7 +280,6 @@ function updateClearFiltersButton() {
     }
 }
 
-// Clear All Filters
 function clearFilters() {
     state.currentSearchQuery = '';
     state.currentCategory = 'all';
@@ -328,12 +288,10 @@ function clearFilters() {
     filterProducts();
 }
 
-// Capitalize Words
 function capitalizeWords(str) {
     return str.replace(/\b\w/g, char => char.toUpperCase());
 }
 
-// Debounce Function for Search
 function debounce(func, delay) {
     let timeoutId;
     return function (...args) {
@@ -342,7 +300,6 @@ function debounce(func, delay) {
     };
 }
 
-// Event Listeners
 elements.searchInput.addEventListener('input', debounce((e) => {
     state.currentSearchQuery = e.target.value.trim();
     filterProducts();
@@ -359,19 +316,16 @@ elements.retryBtn.addEventListener('click', initializeApp);
 
 elements.closeModalBtn.addEventListener('click', closeProductModal);
 
-// Close modal when clicking outside
 elements.productModal.addEventListener('click', (e) => {
     if (e.target === elements.productModal) {
         closeProductModal();
     }
 });
 
-// Close modal with Escape key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !elements.productModal.classList.contains('hidden')) {
         closeProductModal();
     }
 });
 
-// Initialize app when DOM is loaded
 document.addEventListener('DOMContentLoaded', initializeApp);

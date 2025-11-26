@@ -6,44 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Finder - Modern Storefront</title>
 
-    <!-- TailwindCSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Flowbite CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
 
-    <!-- Header -->
     <header class="bg-white shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4 py-6">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex flex-col md:flex-row md:items-center  md:justify-between gap-4">
                 <div class="flex items-center gap-3">
                     <i class="fas fa-store text-4xl text-green-500"></i>
-                    <div>
+                    <div >
                         <h1 class="text-3xl font-bold text-green-400">HM group</h1>
-                        <p class="text-sm text-green-300">Discover amazing products</p>
+                    </div>
+                </div>
+                <div class="flex items-center ">
+                    <div >
+                        <h1 class="text-3xl  text-green-400">Discover amazing products</h1>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
 
-        <!-- Search and Filter Section -->
         <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                <!-- Search Bar -->
                 <div class="relative">
                     <label for="search-input" class="block text-sm font-semibold text-green-500 mb-4">
                         <i class="fas fa-search text-green-500 mr-2"></i>Search Products
@@ -55,7 +48,6 @@
                     </div>
                 </div>
 
-                <!-- Category Filter -->
                 <div>
                     <label for="category-filter" class="block text-sm font-semibold text-green-500 mb-4">
                         <i class="fas fa-filter text-green-500 mr-2"></i>Filter by Category
@@ -63,12 +55,10 @@
                     <select id="category-filter"
                         class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-100 focus:border-indigo-500 transition-all duration-200 outline-none bg-white">
                         <option value="all">All Categories</option>
-                        <!-- Categories will be populated dynamically -->
                     </select>
                 </div>
             </div>
 
-            <!-- Results Info -->
             <div class="mt-4 flex items-center justify-between">
                 <p id="results-count" class="text-sm text-gray-600">
                     <i class="fas fa-box-open mr-2"></i>Loading products...
@@ -80,7 +70,6 @@
             </div>
         </div>
 
-        <!-- Loading Spinner -->
         <div id="loading-spinner" class="flex justify-center items-center py-20">
             <div class="relative">
                 <div class="loader"></div>
@@ -88,7 +77,6 @@
             </div>
         </div>
 
-        <!-- Error Message -->
         <div id="error-message" class="hidden">
             <div class="bg-red-50 border-l-4 border-red-500 rounded-xl p-6 flex items-start gap-4">
                 <i class="fas fa-exclamation-triangle text-3xl text-red-500"></i>
@@ -104,12 +92,9 @@
             </div>
         </div>
 
-        <!-- Products Grid -->
         <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- Products will be populated dynamically -->
         </div>
 
-        <!-- No Results Message -->
         <div id="no-results" class="hidden text-center py-20">
             <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
             <h3 class="text-2xl font-bold text-gray-700 mb-2">No products found</h3>
@@ -117,13 +102,10 @@
         </div>
     </main>
 
-    <!-- Product Detail Modal -->
     <div id="product-modal" tabindex="-1" aria-hidden="true"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-full max-h-full bg-black bg-opacity-50">
         <div class="relative p-4 w-full max-w-4xl max-h-full">
-            <!-- Modal content -->
             <div class="relative bg-white rounded-2xl shadow-2xl">
-                <!-- Modal header -->
                 <div
                     class="flex items-center justify-between p-6 border-b border-gray-200 rounded-t-2xl bg-gradient-to-r from-indigo-50 to-purple-50">
                     <h3 class="text-2xl font-bold text-gray-900">
@@ -134,31 +116,74 @@
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
-                <!-- Modal body -->
                 <div id="modal-content" class="p-6 space-y-6">
-                    <!-- Content will be populated dynamically -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <!-- <footer class="bg-white mt-16 py-8 border-t border-gray-200">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-600">
-                <i class="fas fa-code text-green-500 mr-2"></i>
-                Built with HTML, TailwindCSS, Flowbite & Vanilla JavaScript
-            </p>
-            <p class="text-sm text-gray-500 mt-2">
-                Mini Product Finder Project &copy; 2025
-            </p>
+    <footer class="bg-white text-gray-300 py-12 mt-10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+
+                <div>
+                    <h3 class="text-green-500 font-semibold mb-4">COMPANY</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-700">About</a></li>
+                        <li><a href="#" class="text-gray-700">Careers</a></li>
+                        <li><a href="#" class="text-gray-700">Brand Center</a></li>
+                        <li><a href="#" class="text-gray-700">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-green-500 font-semibold mb-4">HELP CENTER</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-700">Discord Server</a></li>
+                        <li><a href="#" class="text-gray-700">Twitter</a></li>
+                        <li><a href="#" class="text-gray-700">Facebook</a></li>
+                        <li><a href="#" class="text-gray-700">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-green-500 font-semibold mb-4">LEGAL</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-700">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-700">Licensing</a></li>
+                        <li><a href="#" class="text-gray-700">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-green-500 font-semibold mb-4">DOWNLOAD</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-700">iOS</a></li>
+                        <li><a href="#" class="text-gray-700">Android</a></li>
+                        <li><a href="#" class="text-gray-700">Windows</a></li>
+                        <li><a href="#" class="text-gray-700">MacOS</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-gray-700 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between">
+
+                <p class="text-sm text-green-500">© 2025 HR group™. All Rights Reserved.</p>
+
+                <div class="flex gap-5 mt-4 md:mt-0 text-xl">
+                    <a href="#" class="text-green-500"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="text-green-500"><i class="fa-brands fa-discord"></i></a>
+                    <a href="#" class="text-green-500"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="text-green-500"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="text-green-500"><i class="fa-brands fa-dribbble"></i></a>
+                </div>
+            </div>
         </div>
-    </footer> -->
+    </footer>
 
-    <!-- Flowbite JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
-
-    <!-- Custom JavaScript -->
     <script src="script.js"></script>
 </body>
 
